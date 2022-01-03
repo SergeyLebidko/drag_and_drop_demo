@@ -11,7 +11,7 @@ export type Task = {
     order: number
 }
 
-export type InitialData = {
+export interface InitialData {
     cards: Array<Card>,
     tasks: Array<Task>
 }
