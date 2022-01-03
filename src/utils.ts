@@ -5,6 +5,7 @@ export function createInitialData(): IData {
     const cards: Array<Card> = [];
     const tasks: Array<Task> = [];
 
+    // Создаем список карточек
     const cardsCount = CARD_MIN_COUNT + Math.floor(Math.random() * (CARD_MAX_COUNT - CARD_MIN_COUNT + 1));
     for (let index = 0; index < cardsCount; index++) {
         cards.push({
@@ -14,9 +15,10 @@ export function createInitialData(): IData {
         });
     }
 
+    // Создаем задачи для каждой карточки
     let taskIndex = 0;
     cards.forEach(card => {
-        const taskCount = TASK_MIN_COUNT + Math.floor(Math.random() * (TASK_MAX_COUNT - TASK_MIN_COUNT + 1));
+        const taskCount = TASK_MIN_COUNT + Math.floor(Math.random() * (TASK_MAX_COUNT - TASK_MIN_COUNT));
         for (let index = 0; index < taskCount; index++) {
             tasks.push({
                 id: taskIndex,
@@ -26,6 +28,13 @@ export function createInitialData(): IData {
             });
             taskIndex++;
         }
+    });
+
+    // Создаем специальную - пустую - карточку
+    cards.push({
+        id: cardsCount,
+        order: cardsCount,
+        title: `Карточка ${cardsCount + 1}`
     });
 
     return {cards, tasks};
