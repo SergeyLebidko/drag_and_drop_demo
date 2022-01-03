@@ -10,3 +10,8 @@ export type Task = {
     title: string,
     order: number
 }
+
+export type InitialData = {
+    cards: Array<Card>,
+    tasks: Array<Task>
+}
