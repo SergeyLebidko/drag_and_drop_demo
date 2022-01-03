@@ -10,7 +10,7 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
 
     const {title} = task;
     return (
-        <li className="task_panel">
+        <li className="task_panel" draggable>
             {title}
         </li>
     );
