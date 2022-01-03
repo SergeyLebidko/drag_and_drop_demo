@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import {InitialData} from './types';
+import {IAppContext} from './types';
 
-const appContext = createContext<InitialData>({cards: [], tasks: []});
+const appContext = createContext<IAppContext>({cards: [], tasks: [], patchTask: () => null});
 export default appContext;

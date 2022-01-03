@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import TaskPanel from '../TaskPanel/TaskPanel';
-import {Card, InitialData} from '../../types';
+import {Card, IAppContext} from '../../types';
 import appContext from '../../context';
 import './CardPanel.scss';
 
@@ -9,7 +9,7 @@ type CardProps = {
 }
 
 const CardPanel: React.FC<CardProps> = ({card}) => {
-    const {tasks} = useContext<InitialData>(appContext);
+    const {tasks} = useContext<IAppContext>(appContext);
 
     const {id, title} = card;
     return (

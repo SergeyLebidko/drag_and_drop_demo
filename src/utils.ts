@@ -1,7 +1,7 @@
-import {Card, InitialData, Task} from './types';
+import {Card, IData, Task} from './types';
 import {CARD_MIN_COUNT, CARD_MAX_COUNT, TASK_MIN_COUNT, TASK_MAX_COUNT} from './settings';
 
-export function createInitialData(): InitialData {
+export function createInitialData(): IData {
     const cards: Array<Card> = [];
     const tasks: Array<Task> = [];
 

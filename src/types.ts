@@ -11,7 +11,11 @@ export type Task = {
     order: number
 }
 
-export interface InitialData {
+export interface IData {
     cards: Array<Card>,
-    tasks: Array<Task>
+    tasks: Array<Task>,
+}
+
+export interface IAppContext extends IData {
+    patchTask: (task: Task) => void
 }

@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
 import CardPanel from '../CardPanel/CardPanel';
 import appContext from '../../context';
-import {InitialData} from '../../types';
+import {IAppContext} from '../../types';
 import './CardList.scss';
 
 const CardList: React.FC = () => {
-    const {cards} = useContext<InitialData>(appContext);
+    const {cards} = useContext<IAppContext>(appContext);
 
     return (
         <ul className="card_list">
