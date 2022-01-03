@@ -1,11 +1,14 @@
 import React from 'react';
+import appContext from '../../context';
 import './App.scss';
 
 function App() {
     return (
-        <div>
-            Drag and drop demo
-        </div>
+        <appContext.Provider value={{}}>
+            <div>
+                Drag and drop demo
+            </div>
+        </appContext.Provider>
     );
 }
 
