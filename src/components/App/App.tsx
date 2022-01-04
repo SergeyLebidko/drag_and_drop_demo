@@ -50,33 +50,33 @@ function App() {
     }
 
     const insertTask = (task: Task, cardId: number, before?: Task): void => {
-        // Если не указано, перед какой задачей вставлять - вставляем в конец списка
-        if (before === undefined) {
-            setData(({cards, tasks}) => {
-                const _tasks = tasks.filter(_task => _task.id !== task.id);
-                const insertedTask = {
+        setData(({cards, tasks}) => {
+            let _tasks = tasks.filter(_task => _task.id !== task.id);
+            let insertedTask;
+
+            if (before === undefined) {
+                insertedTask = {
                     ...task,
                     cardId,
                     order: getNextFieldValue(_tasks.filter(_task => _task.cardId === cardId), 'order')
                 }
-                return {cards, tasks: [..._tasks, insertedTask]};
-            });
-            return;
-        }
-
-        setData(({cards, tasks}) => {
-            let _tasks = tasks.filter(_task => _task.id !== task.id);
-            _tasks = _tasks.map(_task => {
-                if (_task.cardId === cardId && _task.order >= before.order) {
-                    return {..._task, order: _task.order + 1};
+            } else {
+                _tasks = _tasks.map(_task => {
+                    if (_task.cardId === cardId && _task.order >= before.order) {
+                        return {
+                            ..._task,
+                            order: _task.order + 1
+                        };
+                    }
+                    return _task;
+                });
+                insertedTask = {
+                    ...task,
+                    cardId,
+                    order: before.order
                 }
-                return _task;
-            });
-            const insertedTask = {
-                ...task,
-                cardId,
-                order: before.order
             }
+
             return {cards, tasks: [..._tasks, insertedTask]};
         });
     }
