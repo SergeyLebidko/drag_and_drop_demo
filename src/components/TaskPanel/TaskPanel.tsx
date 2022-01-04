@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react';
-import {IAppContext, Task} from '../../types';
+import {Card, IAppContext, Task} from '../../types';
 import appContext from '../../context';
 import {DNDMode} from '../../types';
 import './TaskPanel.scss';
+import {isTask} from "../../utils";
 
 type TaskProps = {
     task: Task
@@ -57,12 +58,13 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
         event.stopPropagation();
         setDndMode(DNDMode.NoDrag);
 
-        const droppedTask: Task = JSON.parse(event.dataTransfer.getData('Text'));
+        const droppedTask: Task | Card = JSON.parse(event.dataTransfer.getData('Text'));
+        if (isTask(droppedTask)) {
+            // Если исходный и целевой объект совпадают - просто выходим
+            if (droppedTask.id === task.id) return;
 
-        // Если исходный и целевой объект совпадают - просто выходим
-        if (droppedTask.id === task.id) return;
-
-        insertTask(droppedTask, task.cardId, task);
+            insertTask(droppedTask, task.cardId, task);
+        }
     }
 
     return (
