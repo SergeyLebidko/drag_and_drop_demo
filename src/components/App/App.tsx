@@ -25,6 +25,8 @@ function App() {
     const clearDnd = (): void => setDndObject(null);
 
     const insertCard = (card: Card, before?: Card): void => {
+        if (before !== undefined && before.id === card.id) return;
+
         setData(({cards, tasks}) => {
             let _cards = cards.filter(_card => _card.id !== card.id);
             let insertedCard;
@@ -36,7 +38,13 @@ function App() {
                 }
             } else {
                 _cards = _cards.map(_card => {
-                    if (_card.order >= before.order) {
+                    if (card.order < before.order && _card.order <= before.order) {
+                        return {
+                            ..._card,
+                            order: _card.order - 1
+                        }
+                    }
+                    if (card.order > before.order && _card.order >= before.order) {
                         return {
                             ..._card,
                             order: _card.order + 1
