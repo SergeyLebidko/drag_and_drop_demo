@@ -4,6 +4,9 @@ import {IAppContext} from './types';
 const appContext = createContext<IAppContext>({
     cards: [],
     tasks: [],
+    dndObject: null,
+    setDnd: () => null,
+    clearDnd: () => null,
     insertCard: () => null,
     insertTask: () => null
 });

@@ -7,6 +7,7 @@ import './App.scss';
 
 function App() {
     const [{cards, tasks}, setData] = useState<IData>(createInitialData());
+    const [dndObject, setDndObject] = useState<Card | Task | null>(null);
 
     const getNextFieldValue = (objects: Array<Card> | Array<Task>, field: 'id' | 'order'): number => {
         let nextValue = 0;
@@ -18,6 +19,10 @@ function App() {
         }
         return nextValue;
     }
+
+    const setDnd = (object: Card | Task): void => setDndObject(object);
+
+    const clearDnd = (): void => setDndObject(null);
 
     const insertCard = (card: Card, before?: Card): void => {
         setData(({cards, tasks}) => {
@@ -82,7 +87,7 @@ function App() {
     }
 
     return (
-        <appContext.Provider value={{cards, tasks, insertCard, insertTask}}>
+        <appContext.Provider value={{cards, tasks, dndObject, setDnd, clearDnd, insertCard, insertTask}}>
             <CardList/>
         </appContext.Provider>
     );
