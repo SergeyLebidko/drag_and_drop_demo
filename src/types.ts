@@ -17,6 +17,7 @@ export interface IData {
 }
 
 export interface IAppContext extends IData {
+    insertCard: (card: Card, before?: Card) => void
     insertTask: (task: Task, cardId: number, before?: Task) => void
 }
 

@@ -41,3 +41,5 @@ export function createInitialData(): IData {
 
     return {cards, tasks};
 }
+
+export const isTask = (object: Task | Card): object is Task => 'cardId' in object;

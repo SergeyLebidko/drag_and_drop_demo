@@ -19,6 +19,36 @@ function App() {
         return nextValue;
     }
 
+    const insertCard = (card: Card, before?: Card): void => {
+        setData(({cards, tasks}) => {
+            let _cards = cards.filter(_card => _card.id !== card.id);
+            let insertedCard;
+
+            if (before === undefined) {
+                insertedCard = {
+                    ...card,
+                    order: getNextFieldValue(_cards, 'order')
+                }
+            } else {
+                _cards = _cards.map(_card => {
+                    if (_card.order >= before.order) {
+                        return {
+                            ..._card,
+                            order: _card.order + 1
+                        }
+                    }
+                    return _card;
+                });
+                insertedCard = {
+                    ...card,
+                    order: before.order
+                }
+            }
+
+            return {cards: [..._cards, insertedCard], tasks};
+        });
+    }
+
     const insertTask = (task: Task, cardId: number, before?: Task): void => {
         // Если не указано, перед какой задачей вставлять - вставляем в конец списка
         if (before === undefined) {
@@ -52,7 +82,7 @@ function App() {
     }
 
     return (
-        <appContext.Provider value={{cards, tasks, insertTask}}>
+        <appContext.Provider value={{cards, tasks, insertCard, insertTask}}>
             <CardList/>
         </appContext.Provider>
     );

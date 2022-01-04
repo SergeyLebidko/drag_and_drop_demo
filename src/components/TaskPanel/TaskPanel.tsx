@@ -25,11 +25,13 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
     // ---------- на источнике ----------
 
     const dragStartHandler = (event: React.DragEvent<HTMLLIElement>): void => {
+        event.stopPropagation();
         event.dataTransfer.setData('Text', JSON.stringify(task));
         setDndMode(DNDMode.Dragged);
     }
 
-    const dragEndHandler = (): void => {
+    const dragEndHandler = (event: React.DragEvent<HTMLLIElement>): void => {
+        event.stopPropagation();
         setDndMode(DNDMode.NoDrag);
     }
 
