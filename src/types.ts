@@ -17,5 +17,5 @@ export interface IData {
 }
 
 export interface IAppContext extends IData {
-    patchTask: (task: Task) => void
+    insertTask: (task: Task, cardId: number, before?: Task) => void
 }

@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import {Task} from '../../types';
+import React, {useContext, useState} from 'react';
+import {IAppContext, Task} from '../../types';
+import appContext from '../../context';
 import './TaskPanel.scss';
 
 type TaskProps = {
@@ -13,6 +14,7 @@ enum DNDMode {
 }
 
 const TaskPanel: React.FC<TaskProps> = ({task}) => {
+    const {insertTask} = useContext<IAppContext>(appContext);
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
 
     const {id, title} = task;
@@ -55,6 +57,13 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
         event.preventDefault();
         event.stopPropagation();
         setDndMode(DNDMode.NoDrag);
+
+        const droppedTask: Task = JSON.parse(event.dataTransfer.getData('Text'));
+
+        // Если исходный и целевой объект совпадают - просто выходим
+        if (droppedTask.id === task.id) return;
+
+        insertTask(droppedTask, task.cardId, task);
     }
 
     return (
