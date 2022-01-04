@@ -1,16 +1,11 @@
 import React, {useContext, useState} from 'react';
 import {IAppContext, Task} from '../../types';
 import appContext from '../../context';
+import {DNDMode} from '../../types';
 import './TaskPanel.scss';
 
 type TaskProps = {
     task: Task
-}
-
-enum DNDMode {
-    NoDrag,    // Нормальное сосотояние элемента
-    Dragged,   // Элемент перетаскивается пользователем
-    Dropped    // Элемент является целью перетаскивания
 }
 
 const TaskPanel: React.FC<TaskProps> = ({task}) => {

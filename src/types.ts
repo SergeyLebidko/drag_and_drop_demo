@@ -19,3 +19,9 @@ export interface IData {
 export interface IAppContext extends IData {
     insertTask: (task: Task, cardId: number, before?: Task) => void
 }
+
+export enum DNDMode {
+    NoDrag,    // Нормальное сосотояние элемента
+    Dragged,   // Элемент перетаскивается пользователем
+    Dropped    // Элемент является целью перетаскивания
+}
