@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import TaskPanel from '../TaskPanel/TaskPanel';
-import {Card, DNDMode, IAppContext, Task} from '../../types';
+import {Card, DNDMode, IAppContext} from '../../types';
 import appContext from '../../context';
 import {isTask} from '../../utils';
 import './CardPanel.scss';
@@ -10,8 +10,8 @@ type CardProps = {
 }
 
 const CardPanel: React.FC<CardProps> = ({card}) => {
+    const {tasks, setDnd, clearDnd, dndObject, insertCard, insertTask} = useContext<IAppContext>(appContext);
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
-    const {tasks, insertCard, insertTask} = useContext<IAppContext>(appContext);
 
     const {id, title} = card;
 
@@ -25,13 +25,14 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
 
     // ---------- на источнике ----------
 
-    const dragStartHandler = (event: React.DragEvent<HTMLLIElement>): void => {
-        event.dataTransfer.setData('Text', JSON.stringify(card));
+    const dragStartHandler = (): void => {
         setDndMode(DNDMode.Dragged);
+        setDnd(card);
     }
 
     const dragEndHandler = (): void => {
         setDndMode(DNDMode.NoDrag);
+        clearDnd();
     }
 
     // ---------- на приемнике ----------
@@ -49,17 +50,16 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
         setDndMode(oldMode => oldMode === DNDMode.Dropped ? DNDMode.NoDrag : oldMode);
     }
 
-    const dropHandler = (event: React.DragEvent<HTMLLIElement>): void => {
+    const dropHandler = (): void => {
         setDndMode(DNDMode.NoDrag);
-        const droppedObject: Task | Card = (JSON.parse(event.dataTransfer.getData('Text')));
 
-        if (isTask(droppedObject)) {
-            insertTask(droppedObject, card.id);
-            return
-        } else {
-            if (droppedObject.id === card.id) return;
-            insertCard(droppedObject, card);
+        if (dndObject === null) return;
+        if (isTask(dndObject)) {
+            insertTask(dndObject, card.id);
+        } else if (dndObject.id !== card.id) {
+            insertCard(dndObject, card);
         }
+        clearDnd();
     }
 
     return (

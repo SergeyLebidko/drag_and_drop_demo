@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Card, IAppContext, Task} from '../../types';
+import {IAppContext, Task} from '../../types';
 import appContext from '../../context';
 import {DNDMode} from '../../types';
 import {isTask} from '../../utils';
@@ -10,7 +10,7 @@ type TaskProps = {
 }
 
 const TaskPanel: React.FC<TaskProps> = ({task}) => {
-    const {insertTask} = useContext<IAppContext>(appContext);
+    const {insertTask, setDnd, clearDnd, dndObject} = useContext<IAppContext>(appContext);
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
 
     const {id, title} = task;
@@ -27,13 +27,14 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
 
     const dragStartHandler = (event: React.DragEvent<HTMLLIElement>): void => {
         event.stopPropagation();
-        event.dataTransfer.setData('Text', JSON.stringify(task));
         setDndMode(DNDMode.Dragged);
+        setDnd(task);
     }
 
     const dragEndHandler = (event: React.DragEvent<HTMLLIElement>): void => {
         event.stopPropagation();
         setDndMode(DNDMode.NoDrag);
+        clearDnd();
     }
 
     // ---------- на приемнике ----------
@@ -58,13 +59,11 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
         event.stopPropagation();
         setDndMode(DNDMode.NoDrag);
 
-        const droppedObject: Task | Card = JSON.parse(event.dataTransfer.getData('Text'));
-        if (isTask(droppedObject)) {
-            // Если исходный и целевой объект совпадают - просто выходим
-            if (droppedObject.id === task.id) return;
-
-            insertTask(droppedObject, task.cardId, task);
+        if (dndObject === null) return;
+        if (isTask(dndObject) && dndObject.id !== task.id) {
+            insertTask(dndObject, task.cardId, task);
         }
+        clearDnd();
     }
 
     return (
