@@ -50,7 +50,8 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
         setDndMode(oldMode => oldMode === DNDMode.Dropped ? DNDMode.NoDrag : oldMode);
     }
 
-    const dropHandler = (): void => {
+    const dropHandler = (event: React.DragEvent<HTMLLIElement>): void => {
+        event.preventDefault();
         setDndMode(DNDMode.NoDrag);
 
         if (dndObject === null) return;
