@@ -41,7 +41,9 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
 
     const dragEnterHandler = (event: React.DragEvent<HTMLLIElement>): void => {
         event.stopPropagation();
-        setDndMode(oldMode => oldMode === DNDMode.NoDrag ? DNDMode.Dropped : oldMode);
+        if (dndObject !== null && isTask(dndObject)) {
+            setDndMode(oldMode => oldMode === DNDMode.NoDrag ? DNDMode.Dropped : oldMode);
+        }
     }
 
     const dragOverHandler = (event: React.DragEvent<HTMLLIElement>): void => {
