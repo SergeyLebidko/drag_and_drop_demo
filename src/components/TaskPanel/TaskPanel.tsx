@@ -35,7 +35,8 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
 
     // ---------- на приемнике ----------
 
-    const dragEnterHandler = (): void => {
+    const dragEnterHandler = (event: React.DragEvent<HTMLLIElement>): void => {
+        event.stopPropagation();
         setDndMode(oldMode => oldMode === DNDMode.NoDrag ? DNDMode.Dropped : oldMode);
     }
 
@@ -44,7 +45,8 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
         event.stopPropagation();
     }
 
-    const dragLeaveHandler = (): void => {
+    const dragLeaveHandler = (event: React.DragEvent<HTMLLIElement>): void => {
+        event.stopPropagation();
         setDndMode(oldMode => oldMode === DNDMode.Dropped ? DNDMode.NoDrag : oldMode);
     }
 
