@@ -2,8 +2,8 @@ import React, {useContext, useState} from 'react';
 import {Card, IAppContext, Task} from '../../types';
 import appContext from '../../context';
 import {DNDMode} from '../../types';
+import {isTask} from '../../utils';
 import './TaskPanel.scss';
-import {isTask} from "../../utils";
 
 type TaskProps = {
     task: Task
