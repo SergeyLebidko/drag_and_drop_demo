@@ -58,12 +58,12 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
         event.stopPropagation();
         setDndMode(DNDMode.NoDrag);
 
-        const droppedTask: Task | Card = JSON.parse(event.dataTransfer.getData('Text'));
-        if (isTask(droppedTask)) {
+        const droppedObject: Task | Card = JSON.parse(event.dataTransfer.getData('Text'));
+        if (isTask(droppedObject)) {
             // Если исходный и целевой объект совпадают - просто выходим
-            if (droppedTask.id === task.id) return;
+            if (droppedObject.id === task.id) return;
 
-            insertTask(droppedTask, task.cardId, task);
+            insertTask(droppedObject, task.cardId, task);
         }
     }
 
