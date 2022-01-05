@@ -21,6 +21,7 @@ export interface IAppContext extends IData {
     setDnd: (object: Card | Task) => void
     clearDnd: () => void
     createCard: () => void
+    removeCard: (id: number) => void
     insertCard: (card: Card, before?: Card) => void
     insertTask: (task: Task, cardId: number, before?: Task) => void
 }
