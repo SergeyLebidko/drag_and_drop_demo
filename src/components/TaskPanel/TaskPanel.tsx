@@ -80,7 +80,8 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
             onDragOver={dragOverHandler}
             onDrop={dropHandler}
         >
-            {title}
+            <span>{title}</span>
+            <span className="task_panel__remove">&#10006;</span>
         </li>
     );
 }
