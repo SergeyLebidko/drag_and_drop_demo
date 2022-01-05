@@ -7,6 +7,7 @@ const appContext = createContext<IAppContext>({
     dndObject: null,
     setDnd: () => null,
     clearDnd: () => null,
+    createCard: () => null,
     insertCard: () => null,
     insertTask: () => null
 });

@@ -24,6 +24,22 @@ function App() {
 
     const clearDnd = (): void => setDndObject(null);
 
+    const createCard = (): void => {
+        setData(({cards, tasks}) => {
+            const id = getNextFieldValue(cards, 'id');
+            const order = getNextFieldValue(cards, 'order');
+            const createdCard = {
+                id,
+                order,
+                title: `Карточка ${id + 1}`
+            }
+            return {
+                tasks,
+                cards: [...cards, createdCard]
+            }
+        })
+    }
+
     const insertCard = (card: Card, before?: Card): void => {
         if (before !== undefined && before.id === card.id) return;
 
@@ -94,8 +110,18 @@ function App() {
         });
     }
 
+    const context = {
+        cards,
+        tasks,
+        dndObject,
+        setDnd,
+        clearDnd,
+        createCard,
+        insertCard,
+        insertTask
+    };
     return (
-        <appContext.Provider value={{cards, tasks, dndObject, setDnd, clearDnd, insertCard, insertTask}}>
+        <appContext.Provider value={context}>
             <CardList/>
         </appContext.Provider>
     );

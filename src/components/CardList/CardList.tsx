@@ -5,6 +5,7 @@ import {IAppContext} from '../../types';
 import './CardList.scss';
 
 const CardList: React.FC = () => {
+    const {createCard} = useContext<IAppContext>(appContext);
     const {cards} = useContext<IAppContext>(appContext);
 
     return (
@@ -14,7 +15,7 @@ const CardList: React.FC = () => {
                 .map(card => <CardPanel key={card.id} card={card}/>)
             }
             <li className="card_list__control_block">
-                <button className="card_list__add_card">+</button>
+                <button className="card_list__add_card" onClick={createCard}>+</button>
             </li>
         </ul>
     );
