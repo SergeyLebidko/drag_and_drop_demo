@@ -81,7 +81,7 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
             onDrop={dropHandler}
         >
             <span>{title}</span>
-            <span className="task_panel__remove">&#10006;</span>
+            <button className="task_panel__remove_task">&#10006;</button>
         </li>
     );
 }

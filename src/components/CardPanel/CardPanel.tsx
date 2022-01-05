@@ -82,6 +82,7 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
                     .map(task => <TaskPanel key={task.id} task={task}/>)
                 }
             </ul>
+            <button className="card_panel__add_task">+</button>
         </li>
     );
 }

@@ -24,12 +24,13 @@
     border-bottom: 1px solid transparent;
   }
 
-  &__remove {
+  &__remove_task {
     width: 20px;
     height: 20px;
-    background-color: orangered;
-    color: white;
+    border: 1px dashed gray;
     border-radius: 50%;
+    background-color: transparent;
+    color: gray;
     cursor: pointer;
 
     display: flex;
