@@ -10,6 +10,7 @@ const appContext = createContext<IAppContext>({
     createCard: () => null,
     removeCard: () => null,
     createTask: () => null,
+    removeTask: () => null,
     insertCard: () => null,
     insertTask: () => null
 });

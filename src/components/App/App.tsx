@@ -66,6 +66,15 @@ function App() {
         });
     }
 
+    const removeTask = (id: number): void => {
+        setData(({cards, tasks}) => {
+            return {
+                cards,
+                tasks: tasks.filter(task => task.id !== id)
+            }
+        });
+    }
+
     const insertCard = (card: Card, before?: Card): void => {
         if (before !== undefined && before.id === card.id) return;
 
@@ -145,6 +154,7 @@ function App() {
         createCard,
         removeCard,
         createTask,
+        removeTask,
         insertCard,
         insertTask
     };

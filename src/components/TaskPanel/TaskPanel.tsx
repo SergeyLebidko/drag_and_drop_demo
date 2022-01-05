@@ -10,7 +10,7 @@ type TaskProps = {
 }
 
 const TaskPanel: React.FC<TaskProps> = ({task}) => {
-    const {insertTask, setDnd, clearDnd, dndObject} = useContext<IAppContext>(appContext);
+    const {insertTask, setDnd, clearDnd, dndObject, removeTask} = useContext<IAppContext>(appContext);
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
 
     const {id, title} = task;
@@ -81,7 +81,7 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
             onDrop={dropHandler}
         >
             <span>{title}</span>
-            <button className="task_panel__remove_task">&#10006;</button>
+            <button className="task_panel__remove_task" onClick={() => removeTask(id)}>&#10006;</button>
         </li>
     );
 }
