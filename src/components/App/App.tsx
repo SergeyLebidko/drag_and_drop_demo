@@ -49,6 +49,23 @@ function App() {
         });
     }
 
+    const createTask = (cardId: number): void => {
+        setData(({cards, tasks}) => {
+            const id = getNextFieldValue(tasks, 'id');
+            const order = getNextFieldValue(tasks.filter(task => task.cardId === cardId), 'order');
+            const createdTask = {
+                id,
+                cardId,
+                order,
+                title: `Задача ${id + 1}`
+            }
+            return {
+                cards,
+                tasks: [...tasks, createdTask]
+            }
+        });
+    }
+
     const insertCard = (card: Card, before?: Card): void => {
         if (before !== undefined && before.id === card.id) return;
 
@@ -127,6 +144,7 @@ function App() {
         clearDnd,
         createCard,
         removeCard,
+        createTask,
         insertCard,
         insertTask
     };

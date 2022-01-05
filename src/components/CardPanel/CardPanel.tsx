@@ -11,7 +11,7 @@ type CardProps = {
 
 const CardPanel: React.FC<CardProps> = ({card}) => {
     const context: IAppContext = useContext(appContext);
-    const {tasks, setDnd, clearDnd, dndObject, removeCard, insertCard, insertTask} = context;
+    const {tasks, setDnd, clearDnd, dndObject, removeCard, createTask, insertCard, insertTask} = context;
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
 
     const {id, title} = card;
@@ -86,7 +86,7 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
                     .map(task => <TaskPanel key={task.id} task={task}/>)
                 }
             </ul>
-            <button className="card_panel__add_task">+</button>
+            <button className="card_panel__add_task" onClick={() => createTask(id)}>+</button>
         </li>
     );
 }
