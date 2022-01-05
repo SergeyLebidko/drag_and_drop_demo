@@ -13,6 +13,9 @@ const CardList: React.FC = () => {
                 .sort((a, b) => a.order - b.order)
                 .map(card => <CardPanel key={card.id} card={card}/>)
             }
+            <li className="card_list__control_block">
+                <button className="card_list__add_card">+</button>
+            </li>
         </ul>
     );
 }
