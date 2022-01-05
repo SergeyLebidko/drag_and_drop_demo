@@ -24,11 +24,37 @@
     pointer-events: none;
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
-    text-align: center;
     padding: 4px 0;
     border-radius: 3px;
     background-color: rgb(70, 70, 70);
     color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+  }
+
+  &__remove_card {
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    pointer-events: auto;
   }
 
   .task_panel + .task_panel {
@@ -38,7 +64,7 @@
   &__add_task {
     margin-top: 0.5em;
     background-color: transparent;
-    border: 1px dashed gray;
+    border: 1px solid gray;
     border-radius: 3px;
     color: gray;
     font-size: 1.2rem;

@@ -74,7 +74,10 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
             onDragLeave={dragLeaveHandler}
             onDrop={dropHandler}
         >
-            <h1 className="card_panel__title">{title}</h1>
+            <div className="card_panel__title">
+                <span>{title}</span>
+                <button className="card_panel__remove_card">&#10006;</button>
+            </div>
             <ul>
                 {tasks
                     .filter(task => task.cardId === id)
