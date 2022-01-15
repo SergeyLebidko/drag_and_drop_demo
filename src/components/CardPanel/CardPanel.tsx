@@ -5,6 +5,7 @@ import appContext from '../../context';
 import {isTask} from '../../utils';
 import './CardPanel.scss';
 import {AddTaskButton, RemoveCardButton} from "../../styled/buttons";
+import {CardContainer} from "../../styled/panels";
 
 type CardProps = {
     card: Card
@@ -16,14 +17,6 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
 
     const {id, title} = card;
-
-    const getClasses = (): string => {
-        const classes = ['card_panel'];
-        if (dndMode === DNDMode.NoDrag) classes.push('card_panel_normal');
-        if (dndMode === DNDMode.Dragged) classes.push('card_panel_dragged');
-        if (dndMode === DNDMode.Dropped) classes.push('card_panel_dropped');
-        return classes.join(' ');
-    };
 
     // ---------- на источнике ----------
 
@@ -66,9 +59,9 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
     }
 
     return (
-        <li
-            className={getClasses()}
+        <CardContainer
             draggable
+            dndMode={dndMode}
             onDragStart={dragStartHandler}
             onDragEnd={dragEndHandler}
             onDragEnter={dragEnterHandler}
@@ -88,7 +81,7 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
                 }
             </ul>
             <AddTaskButton onClick={() => createTask(id)}>+</AddTaskButton>
-        </li>
+        </CardContainer>
     );
 }
 
