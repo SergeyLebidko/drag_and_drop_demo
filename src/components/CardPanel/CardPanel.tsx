@@ -58,6 +58,7 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
         clearDnd();
     }
 
+    const tasksForShow = tasks.filter(task => task.cardId === id).sort((a, b) => a.order - b.order);
     return (
         <CardContainer
             draggable
@@ -73,13 +74,7 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
                 <span>{title}</span>
                 <RemoveCardButton onClick={() => removeCard(id)}>&#10006;</RemoveCardButton>
             </CardHeader>
-            <ul>
-                {tasks
-                    .filter(task => task.cardId === id)
-                    .sort((a, b) => a.order - b.order)
-                    .map(task => <TaskPanel key={task.id} task={task}/>)
-                }
-            </ul>
+            {tasksForShow.length > 0 && <ul>{tasksForShow.map(task => <TaskPanel key={task.id} task={task}/>)}</ul>}
             <AddTaskButton onClick={() => createTask(id)}>+</AddTaskButton>
         </CardContainer>
     );

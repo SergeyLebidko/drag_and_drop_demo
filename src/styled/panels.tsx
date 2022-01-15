@@ -1,4 +1,5 @@
 import styled, {css} from 'styled-components';
+import {AddTaskButton} from './buttons';
 import {DNDMode} from '../types';
 
 export const TaskContainer = styled.li<{ dndMode: DNDMode }>`
@@ -51,6 +52,10 @@ export const CardContainer = styled.li<{ dndMode: DNDMode }>`
     `;
   }}
   ${TaskContainer} + ${TaskContainer} {
+    margin-top: 0.5em;
+  }
+
+  ul + ${AddTaskButton} {
     margin-top: 0.5em;
   }
 `;
