@@ -50,8 +50,31 @@ export const CardContainer = styled.li<{ dndMode: DNDMode }>`
       background-color: rgb(240, 240, 240);
     `;
   }}
-  
   ${TaskContainer} + ${TaskContainer} {
     margin-top: 0.5em;
+  }
+`;
+
+export const CardListContainer = styled.ul`
+  background-image: linear-gradient(to right bottom, #c9c9c9, #c3c3c3, #bebebe, #b8b8b8, #b3b3b3);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: flex-start;
+
+  padding: 1em;
+  overflow: auto;
+
+  ${CardContainer} + ${CardContainer} {
+    margin-left: 1em;
+  }
+
+  ${CardContainer} + .control_block {
+    margin-left: 1em;
   }
 `;
