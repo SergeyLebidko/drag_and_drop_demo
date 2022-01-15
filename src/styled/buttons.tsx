@@ -34,3 +34,24 @@ export const RemoveTaskButton = styled.button`
   justify-content: center;
   align-items: center;
 `
+
+export const RemoveCardButton = styled.button`
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  pointer-events: auto;
+`

@@ -4,7 +4,7 @@ import {Card, DNDMode, IAppContext} from '../../types';
 import appContext from '../../context';
 import {isTask} from '../../utils';
 import './CardPanel.scss';
-import {AddTaskButton} from "../../styled/buttons";
+import {AddTaskButton, RemoveCardButton} from "../../styled/buttons";
 
 type CardProps = {
     card: Card
@@ -78,7 +78,7 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
         >
             <div className="card_panel__title">
                 <span>{title}</span>
-                <button className="card_panel__remove_card" onClick={() => removeCard(id)}>&#10006;</button>
+                <RemoveCardButton onClick={() => removeCard(id)}>&#10006;</RemoveCardButton>
             </div>
             <ul>
                 {tasks
