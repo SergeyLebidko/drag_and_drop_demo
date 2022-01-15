@@ -3,7 +3,6 @@ import CardList from '../CardList/CardList';
 import appContext from '../../context';
 import {Card, IData, Task} from '../../types';
 import {createInitialData} from '../../utils';
-import './App.scss';
 
 function App() {
     const [{cards, tasks}, setData] = useState<IData>(createInitialData());

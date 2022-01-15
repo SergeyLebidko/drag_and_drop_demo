@@ -1,9 +1,11 @@
 import React, {useContext, useState} from 'react';
 import TaskPanel from '../TaskPanel/TaskPanel';
+import {AddTaskButton, RemoveCardButton} from '../../styled/buttons';
+import {CardContainer} from '../../styled/panels';
 import {Card, DNDMode, IAppContext} from '../../types';
 import appContext from '../../context';
 import {isTask} from '../../utils';
-import './CardPanel.scss';
+import {CardHeader} from "../../styled/common";
 
 type CardProps = {
     card: Card
@@ -15,14 +17,6 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
 
     const {id, title} = card;
-
-    const getClasses = (): string => {
-        const classes = ['card_panel'];
-        if (dndMode === DNDMode.NoDrag) classes.push('card_panel_normal');
-        if (dndMode === DNDMode.Dragged) classes.push('card_panel_dragged');
-        if (dndMode === DNDMode.Dropped) classes.push('card_panel_dropped');
-        return classes.join(' ');
-    };
 
     // ---------- на источнике ----------
 
@@ -65,9 +59,9 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
     }
 
     return (
-        <li
-            className={getClasses()}
+        <CardContainer
             draggable
+            dndMode={dndMode}
             onDragStart={dragStartHandler}
             onDragEnd={dragEndHandler}
             onDragEnter={dragEnterHandler}
@@ -75,10 +69,10 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
             onDragLeave={dragLeaveHandler}
             onDrop={dropHandler}
         >
-            <div className="card_panel__title">
+            <CardHeader>
                 <span>{title}</span>
-                <button className="card_panel__remove_card" onClick={() => removeCard(id)}>&#10006;</button>
-            </div>
+                <RemoveCardButton onClick={() => removeCard(id)}>&#10006;</RemoveCardButton>
+            </CardHeader>
             <ul>
                 {tasks
                     .filter(task => task.cardId === id)
@@ -86,8 +80,8 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
                     .map(task => <TaskPanel key={task.id} task={task}/>)
                 }
             </ul>
-            <button className="card_panel__add_task" onClick={() => createTask(id)}>+</button>
-        </li>
+            <AddTaskButton onClick={() => createTask(id)}>+</AddTaskButton>
+        </CardContainer>
     );
 }
 
