@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
+import {RemoveTaskButton} from '../../styled/buttons';
+import {TaskContainer} from '../../styled/panels';
 import {IAppContext, Task} from '../../types';
-import appContext from '../../context';
 import {DNDMode} from '../../types';
+import appContext from '../../context';
 import {isTask} from '../../utils';
-import './TaskPanel.scss';
-import {RemoveTaskButton} from "../../styled/buttons";
 
 type TaskProps = {
     task: Task
@@ -15,14 +15,6 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
     const [dndMode, setDndMode] = useState<DNDMode>(DNDMode.NoDrag);
 
     const {id, title} = task;
-
-    const getClasses = (): string => {
-        const classes = ['task_panel'];
-        if (dndMode === DNDMode.NoDrag) classes.push('task_panel_normal');
-        if (dndMode === DNDMode.Dragged) classes.push('task_panel_dragged');
-        if (dndMode === DNDMode.Dropped) classes.push('task_panel_dropped');
-        return classes.join(' ');
-    };
 
     // ---------- на источнике ----------
 
@@ -70,10 +62,9 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
     }
 
     return (
-        <li
-            className={getClasses()}
-            data-id={id}
+        <TaskContainer
             draggable
+            dndMode={dndMode}
             onDragStart={dragStartHandler}
             onDragEnd={dragEndHandler}
             onDragEnter={dragEnterHandler}
@@ -83,7 +74,7 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
         >
             <span>{title}</span>
             <RemoveTaskButton onClick={() => removeTask(id)}>&#10006;</RemoveTaskButton>
-        </li>
+        </TaskContainer>
     );
 }
 
