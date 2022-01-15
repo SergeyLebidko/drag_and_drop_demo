@@ -3,6 +3,7 @@ import CardPanel from '../CardPanel/CardPanel';
 import appContext from '../../context';
 import {IAppContext} from '../../types';
 import './CardList.scss';
+import {AddCardButton} from "../../styled/buttons";
 
 const CardList: React.FC = () => {
     const {createCard} = useContext<IAppContext>(appContext);
@@ -15,7 +16,7 @@ const CardList: React.FC = () => {
                 .map(card => <CardPanel key={card.id} card={card}/>)
             }
             <li className="card_list__control_block">
-                <button className="card_list__add_card" onClick={createCard}>+</button>
+                <AddCardButton onClick={createCard}>+</AddCardButton>
             </li>
         </ul>
     );
