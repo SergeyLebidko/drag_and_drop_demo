@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
 import TaskPanel from '../TaskPanel/TaskPanel';
+import {AddTaskButton, RemoveCardButton} from '../../styled/buttons';
+import {CardContainer} from '../../styled/panels';
 import {Card, DNDMode, IAppContext} from '../../types';
 import appContext from '../../context';
 import {isTask} from '../../utils';
-import './CardPanel.scss';
-import {AddTaskButton, RemoveCardButton} from "../../styled/buttons";
-import {CardContainer} from "../../styled/panels";
+import {CardHeader} from "../../styled/common";
 
 type CardProps = {
     card: Card
@@ -69,10 +69,10 @@ const CardPanel: React.FC<CardProps> = ({card}) => {
             onDragLeave={dragLeaveHandler}
             onDrop={dropHandler}
         >
-            <div className="card_panel__title">
+            <CardHeader>
                 <span>{title}</span>
                 <RemoveCardButton onClick={() => removeCard(id)}>&#10006;</RemoveCardButton>
-            </div>
+            </CardHeader>
             <ul>
                 {tasks
                     .filter(task => task.cardId === id)
