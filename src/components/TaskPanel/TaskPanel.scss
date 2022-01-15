@@ -23,18 +23,4 @@
     color: white;
     border-bottom: 1px solid transparent;
   }
-
-  &__remove_task {
-    width: 20px;
-    height: 20px;
-    border: 1px solid gray;
-    border-radius: 3px;
-    background-color: transparent;
-    color: gray;
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }

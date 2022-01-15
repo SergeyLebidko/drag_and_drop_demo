@@ -4,6 +4,7 @@ import appContext from '../../context';
 import {DNDMode} from '../../types';
 import {isTask} from '../../utils';
 import './TaskPanel.scss';
+import {RemoveTaskButton} from "../../styled/buttons";
 
 type TaskProps = {
     task: Task
@@ -81,7 +82,7 @@ const TaskPanel: React.FC<TaskProps> = ({task}) => {
             onDrop={dropHandler}
         >
             <span>{title}</span>
-            <button className="task_panel__remove_task" onClick={() => removeTask(id)}>&#10006;</button>
+            <RemoveTaskButton onClick={() => removeTask(id)}>&#10006;</RemoveTaskButton>
         </li>
     );
 }

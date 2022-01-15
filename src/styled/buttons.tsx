@@ -20,3 +20,17 @@ export const AddCardButton = styled.button`
   font-size: 1.2rem;
   cursor: pointer;
 `
+
+export const RemoveTaskButton = styled.button`
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  background-color: transparent;
+  color: gray;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
